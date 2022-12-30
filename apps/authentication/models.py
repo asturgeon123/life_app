@@ -13,6 +13,7 @@ from apps import db, login_manager
 from apps.authentication.util import hash_pass
 
 class Users(db.Model, UserMixin):
+    
 
     __tablename__ = 'Users'
 
@@ -20,8 +21,26 @@ class Users(db.Model, UserMixin):
     username      = db.Column(db.String(64), unique=True)
     email         = db.Column(db.String(64), unique=True)
     password      = db.Column(db.LargeBinary)
+    phone_number = db.Column(db.Integer, nullable=True)
+
+    first_name      = db.Column(db.String(64), nullable=True)
+    last_name       = db.Column(db.String(64), nullable=True)
+
+    address         = db.Column(db.String(64), nullable=True)
+    city            = db.Column(db.String(64), nullable=True)
+    state           = db.Column(db.String(64), nullable=True)
+    country         = db.Column(db.String(64), nullable=True)
+    zip_code        = db.Column(db.String(64), nullable=True)
+
+    about_me        = db.Column(db.String(64), nullable=True)
+    picture_filepath  = db.Column(db.String(64), nullable=True)
 
     oauth_github  = db.Column(db.String(100), nullable=True)
+
+    '''If you add more fields, you need to migrate the database.
+       1. In a terminal, run: flask db migrate -m "Initial migration."
+       2. Then run: flask db upgrade
+    '''
 
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
@@ -37,8 +56,83 @@ class Users(db.Model, UserMixin):
 
             setattr(self, property, value)
 
+    def update(self, update_dictionary: dict):
+        for col_name in self.__table__.columns.keys():
+            if col_name in update_dictionary:
+                setattr(self, col_name, update_dictionary[col_name])
+
     def __repr__(self):
-        return str(self.username)
+        big_string = ''
+        for col_name in self.__table__.columns.keys():
+            big_string += f'{col_name}: {getattr(self, col_name)} '
+        return big_string
+
+
+
+class Companys(db.Model):
+    
+
+    __tablename__ = 'Companys'
+
+    id            = db.Column(db.Integer, primary_key=True)
+    email         = db.Column(db.String(64), unique=True)
+    phone_number = db.Column(db.Integer, nullable=True)
+
+    company_name    = db.Column(db.String(64), nullable=False)
+
+    address         = db.Column(db.String(64), nullable=True)
+    city            = db.Column(db.String(64), nullable=True)
+    state           = db.Column(db.String(64), nullable=True)
+    country         = db.Column(db.String(64), nullable=True)
+    zip_code        = db.Column(db.String(64), nullable=True)
+
+    instruction_pay_rate = db.Column(db.Integer, nullable=True)
+
+    '''If you add more fields, you need to migrate the database.
+       1. In a terminal, run: flask db migrate -m "Initial migration."
+       2. Then run: flask db upgrade
+    '''
+
+    def __init__(self, **kwargs):
+        for property, value in kwargs.items():
+            # depending on whether value is an iterable or not, we must
+            # unpack it's value (when **kwargs is request.form, some values
+            # will be a 1-element list)
+            if hasattr(value, '__iter__') and not isinstance(value, str):
+                # the ,= unpack of a singleton fails PEP8 (travis flake8 test)
+                value = value[0]
+
+            if property == 'password':
+                value = hash_pass(value)  # we need bytes here (not plain str)
+
+            setattr(self, property, value)
+
+    def update(self, update_dictionary: dict):
+        for col_name in self.__table__.columns.keys():
+            if col_name in update_dictionary:
+                setattr(self, col_name, update_dictionary[col_name])
+
+    def __repr__(self):
+        big_string = ''
+        for col_name in self.__table__.columns.keys():
+            big_string += f'{col_name}: {getattr(self, col_name)} '
+        return big_string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @login_manager.user_loader

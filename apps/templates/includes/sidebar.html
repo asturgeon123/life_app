@@ -1,15 +1,15 @@
 
-    <div class="sidebar">
+    <div class="sidebar" data-color="blue">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
       -->
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="javascript:void(0)" class="simple-text logo-mini">
-                    CT
+                    
                 </a>
                 <a href="javascript:void(0)" class="simple-text logo-normal">
-                    Creative Tim
+                    {{ current_user.username }}
                 </a>
             </div>
             <ul class="nav">
@@ -19,16 +19,22 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li>
+                    <a href="/log_flight.html">
+                      <i class="tim-icons icon-spaceship"></i>
+                      <p>Log Flight</p>
+                    </a>
+                </li>
                 <li class="{% if 'user' in segment %} active {% endif %}">
                     <a href="/user.html">
                         <i class="tim-icons icon-single-02"></i>
                         <p>User Profile</p>
                     </a>
                 </li>
-                <li class="{% if 'icons' in segment %} active {% endif %}">
-                    <a href="/icons.html">
-                        <i class="tim-icons icon-atom"></i>
-                        <p>Icons</p>
+                <li class="{% if 'user' in segment %} active {% endif %}">
+                    <a href="/add_company.html">
+                        <i class="tim-icons icon-single-02"></i>
+                        <p>Companies</p>
                     </a>
                 </li>
                 <li class="{% if 'map' in segment %} active {% endif %}">

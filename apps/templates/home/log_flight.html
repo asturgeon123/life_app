@@ -12,127 +12,81 @@
       <div class="col-md-8">
 
         <form role="form" method="post" action="">
-        {{ form.hidden_tag() }} 
 
-      
         <div class="card">
           <div class="card-header">
-            <h5 class="title">Edit Profile</h5>
+            <h5 class="title">Log Flight</h5>
           </div>
 
           <div class="card-body">
 
-
-
-
-
-
-
-              {% if not current_user.email %}
-              <div class="row">
-
-                <div class="col-md-6 pr-md-1">
-
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <p class="mb-0">
-                        Please add an email address.
-                    </p>
-                  </div>
-
-                </div>
-      
-              </div>
-              {% endif %}
-              
-
-              <div class="row">
-
-                <div class="col-md-6 pr-md-1">
-                  <div class="form-group">
-                    <label class="form-label {% if not current_user.email %} text-danger {% endif%}">Email Address</label>
-                    <input type="email" name="email" class="form-control"
-                    {% if current_user.email %} readonly {% endif %}
-                     placeholder="Your email Here"
-                     value="{% if current_user.email %} {{ current_user.email }} {% endif %}">
-                     <section class="display-error-message">
-                    </section>
-                  </div>
-                </div>
-                
-                <div class="col-md-6 pr-md-1">
-                  <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" class="form-control" value="{{current_user.username}}"  readonly>
-                  </div>
-                </div>
-                
-              </div>
               <div class="row">
                 <div class="col-md-6 pr-md-1">
                   <div class="form-group">
-                    <label>First Name</label>
-                    {{ form.first_name(class="form-control") }}
-                  </div>
-                </div>
-                <div class="col-md-6 pl-md-1">
-                  <div class="form-group">
-                    <label>Last Name</label>
-                    {{ form.last_name(class="form-control") }}
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Phone Number</label>
-                    {{ form.phone_number(class="form-control") }}
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Address</label>
-                    {{ form.address(class="form-control") }}
+                    <label>Student Name</label>
+                    {{ form.student_name(class="form-control") }}
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4 pr-md-1">
                   <div class="form-group">
-                    <label>City</label>
-                    {{ form.city(class="form-control") }}
+                    <label>Ground Start</label>
+                    <input id="ground_start" type="time" class="form-control" value="">
                   </div>
                 </div>
                 <div class="col-md-4 pr-md-1">
                   <div class="form-group">
-                    <label>State</label>
-                    {{ form.state(class="form-control") }}
+                    <label>Ground End</label>
+                    <input id="ground_end" type="time" class="form-control" value="">
+                  </div>
+                </div>
+                <div class="col-md-4 pr-md-1">
+                  <div class="form-group">
+                    <label>Ground Instruction Total</label>
+                    {{ form.ground_total(class="form-control") }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Aircraft Tailnumber</label>
+                    {{ form.aircraft_tailnumber(class="form-control") }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 pr-md-1">
+                  <div class="form-group">
+                    <label>HOBBS Start</label>
+                    {{ form.hobbs_start(class="form-control") }}
+                  </div>
+                </div>
+                <div class="col-md-4 pr-md-1">
+                  <div class="form-group">
+                    <label>HOBBS End</label>
+                    {{ form.hobbs_end(class="form-control") }}
                   </div>
                 </div>
                 <div class="col-md-4 pl-md-1">
                   <div class="form-group">
-                    <label>Postal Code</label>
-                    {{ form.zip_code(class="form-control") }}
+                    <label>Flight Total</label>
+                    {{ form.hobbs_total(class="form-control") }}
                   </div>
                 </div>
               </div>
 
 
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Country</label>
-                    {{ form.country(class="form-control") }}
-                  </div>
-                </div>
-              </div>
+
               
               <div class="row">
                 <div class="col-md-8">
                   <div class="form-group">
-                    <label>About Me</label>
-                    {{ form.about_me(class="form-control") }}  
+                    <label>Remarks</label>
+                    {{ form.remarks(class="form-control") }}
                 </div>
                 </div>
               </div>
@@ -161,7 +115,7 @@
                 <div class="block block-four"></div>
                 <a href="javascript:void(0)">
                   <img class="avatar" src="{{ config.ASSETS_ROOT }}/img/emilyz.jpg" alt="...">
-                  <h5 class="title">{{ current_user.first_name + ' ' + current_user.last_name }}</h5>
+                  <h5 class="title">First Last</h5>
                 </a>
                 <p class="description">
                   Ceo/Co-Founder
@@ -169,7 +123,7 @@
               </div>
             </p>
             <div class="card-description">
-              {{ current_user.about_me}}
+              About me
             </div>
           </div>
           <div class="card-footer">
@@ -193,4 +147,8 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+
+<script src="{{ config.ASSETS_ROOT }}/js/flight_logging.js"></script>
+
+{% endblock javascripts %}

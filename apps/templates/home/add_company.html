@@ -1,0 +1,136 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} User Profile {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Select Company</h5>
+        </div>
+        <form action="">
+          <div class="card-body">
+
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+              <option selected>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+
+          </div>
+
+          <div class="card-footer">
+            <button type="submit" name="select_company" class="btn btn-fill btn-primary">Save</button>
+            <button type="submit" name="new_company" class="btn btn-fill btn-primary">Add New Company</button>
+          </div>
+
+        </form>
+      </div>
+
+
+    </div>
+
+    <form role="form" method="post" action="">
+    <div class="col-md-8">
+      {{ form.hidden_tag() }} 
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Edit Company</h5>
+        </div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label>Company Name</label>
+                {{ form.company_name(class="form-control") }}
+              </div>
+            </div>
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label>Company Email</label>
+                {{ form.company_email(class="form-control") }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Phone Number</label>
+                {{ form.company_phone_number(class="form-control") }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Address</label>
+                {{ form.company_address(class="form-control") }}
+              </div>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-4 pr-md-1">
+              <div class="form-group">
+                <label>City</label>
+                {{ form.company_city(class="form-control") }}
+              </div>
+            </div>
+            <div class="col-md-4 pr-md-1">
+              <div class="form-group">
+                <label>State</label>
+                {{ form.company_state(class="form-control") }}
+              </div>
+            </div>
+            <div class="col-md-4 pl-md-1">
+              <div class="form-group">
+                <label>Postal Code</label>
+                {{ form.company_zip_code(class="form-control") }}
+              </div>
+            </div>
+          </div>
+  
+  
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Country</label>
+                {{ form.company_country(class="form-control") }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+
+        </div>
+
+        <div class="card-footer">
+          <button type="submit" name="update" class="btn btn-fill btn-primary">Update</button>
+          <button type="submit" name="register" class="btn btn-fill btn-primary">Add New Company</button>
+        </div>
+      </div>
+    </form>
+
+
+
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

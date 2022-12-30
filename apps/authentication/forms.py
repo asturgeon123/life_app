@@ -5,7 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
-from wtforms.validators import Email, DataRequired
+from wtforms.validators import Email, DataRequired, Length
 
 # login and registration
 
@@ -29,3 +29,5 @@ class CreateAccountForm(FlaskForm):
     password = PasswordField('Password',
                              id='pwd_create',
                              validators=[DataRequired()])
+
+
